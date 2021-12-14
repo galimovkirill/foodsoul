@@ -15,9 +15,21 @@ export default {
 
   css: ['@/assets/styles/main.scss'],
 
-  components: true,
+  buildModules: [
+    '@nuxt/typescript-build',
+    '@nuxtjs/style-resources',
+    '@nuxtjs/google-fonts',
+  ],
 
-  buildModules: ['@nuxt/typescript-build'],
+  styleResources: {
+    scss: ['~/assets/styles/variables.scss'],
+  },
+
+  googleFonts: {
+    families: {
+      Montserrat: true,
+    },
+  },
 
   modules: ['@nuxtjs/axios'],
 

@@ -1,17 +1,19 @@
 <template>
   <div class="catalog-grid">
-    <CatalogCard v-for="card in 7" :key="card" />
+    <CatalogCard v-for="item in items" :key="item.id" :data="item" />
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 import CatalogCard from '@/components/Catalog/CatalogCard.vue'
 
 @Component({
   components: { CatalogCard },
 })
-export default class CatalogGrid extends Vue {}
+export default class CatalogGrid extends Vue {
+  @Prop({ required: true }) items!: Array<any>
+}
 </script>
 
 <style lang="scss">

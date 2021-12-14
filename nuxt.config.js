@@ -15,10 +15,17 @@ export default {
 
   css: ['@/assets/styles/main.scss'],
 
+  modules: ['@nuxtjs/axios', '@nuxtjs/dotenv'],
   buildModules: [
     '@nuxt/typescript-build',
     '@nuxtjs/style-resources',
     '@nuxtjs/google-fonts',
+    [
+      '@nuxtjs/dotenv',
+      {
+        filename: `.env.${process.env.NODE_ENV}`,
+      },
+    ],
   ],
 
   styleResources: {
@@ -30,8 +37,6 @@ export default {
       Montserrat: true,
     },
   },
-
-  modules: ['@nuxtjs/axios'],
 
   axios: {
     baseURL: '/',

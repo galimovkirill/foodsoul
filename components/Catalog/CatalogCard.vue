@@ -1,38 +1,41 @@
 <template>
   <div class="catalog-card">
     <div class="catalog-card-preview">
-      <div class="catalog-card-preview__category">men's clothing</div>
+      <div class="catalog-card-preview__category">{{ data.category }}</div>
 
-      <img
-        src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-        alt=""
-        class="catalog-card-preview__image"
-      />
+      <img :src="data.image" alt="" class="catalog-card-preview__image" />
     </div>
 
     <div class="catalog-card-body">
-      <span class="catalog-card-body__price">22.3 $</span>
-      <h3 class="catalog-card-body__title">
-        Mens Casual Premium Slim Fit T-Shirts
-      </h3>
+      <span class="catalog-card-body__price">{{ data.price }} $</span>
+      <h3 class="catalog-card-body__title">{{ data.title }}</h3>
 
-      <BaseButton label="В корзину" type="secondary" />
+      <BaseButton
+        label="В корзину"
+        type="secondary"
+        class="catalog-card-body__cart-button"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 import BaseButton from '~/components/Base/BaseButton.vue'
 
 @Component({
   components: { BaseButton },
 })
-export default class CatalogCard extends Vue {}
+export default class CatalogCard extends Vue {
+  @Prop({ required: true }) data!: Object
+}
 </script>
 
 <style lang="scss">
 .catalog-card {
+  display: flex;
+  flex-direction: column;
+
   &-preview {
     position: relative;
 
@@ -51,13 +54,18 @@ export default class CatalogCard extends Vue {}
     }
 
     &__image {
+      display: block;
+      margin: 0 auto;
       height: 180px;
+      max-width: 180px;
       width: 100%;
       object-fit: contain;
     }
   }
 
   &-body {
+    margin-top: auto;
+
     &__price {
       font-size: 18px;
       font-weight: bold;

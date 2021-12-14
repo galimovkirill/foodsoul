@@ -17,6 +17,7 @@ export default {
 
 <style lang="scss">
 .main {
+  padding-bottom: 3rem;
   &-wrapper {
     margin-top: 3rem;
   }

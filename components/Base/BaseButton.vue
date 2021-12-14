@@ -27,6 +27,8 @@ export default class BaseButton extends Vue {
   border-radius: 0.5rem;
   cursor: pointer;
 
+  transition: 0.2s linear;
+
   &--primary {
     background: $dark-blue;
     color: $white;
@@ -36,6 +38,11 @@ export default class BaseButton extends Vue {
     background: transparent;
     color: $dark-blue;
     border: 1px solid $dark-blue;
+
+    &:hover {
+      background: $dark-blue;
+      color: $white;
+    }
   }
 }
 </style>

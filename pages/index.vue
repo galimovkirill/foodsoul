@@ -1,15 +1,15 @@
 <template>
   <div class="container">
-    <h1>Hello</h1>
-    <BaseButton label="Добавить в корзину" />
+    <h1 class="hero-title">Каталог</h1>
+    <CatalogGrid />
   </div>
 </template>
 
 <script lang="ts">
-import BaseButton from '~/components/Base/BaseButton.vue'
+import CatalogGrid from '~/components/Catalog/CatalogGrid.vue'
 
 export default {
   name: 'PageIndex',
-  components: { BaseButton },
+  components: { CatalogGrid },
 }
 </script>

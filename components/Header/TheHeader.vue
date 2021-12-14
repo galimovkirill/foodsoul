@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="header-wrapper">
-      <div class="header-logo">Онлайн-магазин</div>
+      <nuxt-link to="/" class="header-logo">Foodsoul</nuxt-link>
 
       <div class="header-menu">
         <nuxt-link to="/cart" class="header-menu__item">Корзина</nuxt-link>
@@ -12,9 +12,13 @@
 
 <style lang="scss">
 .header {
-  background: black;
-  color: white;
+  background: $dark-blue;
+  color: $white;
   padding: 1rem;
+
+  &-logo {
+    font-weight: 800;
+  }
 
   &-wrapper {
     display: flex;

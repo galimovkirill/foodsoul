@@ -1,7 +1,9 @@
 <template>
-  <main>
+  <main class="main">
     <TheHeader />
-    <Nuxt />
+    <div class="main-wrapper">
+      <Nuxt />
+    </div>
   </main>
 </template>
 
@@ -12,3 +14,11 @@ export default {
   components: { TheHeader },
 }
 </script>
+
+<style lang="scss">
+.main {
+  &-wrapper {
+    margin-top: 3rem;
+  }
+}
+</style>

@@ -6,19 +6,20 @@
 </template>
 
 <script lang="ts">
-import api from '@/services/api'
+import { Vue, Component } from 'nuxt-property-decorator'
 import CatalogGrid from '~/components/Catalog/CatalogGrid.vue'
+import { catalog } from '~/utils/store-accessor'
 
-export default {
-  name: 'PageIndex',
+@Component({
   components: { CatalogGrid },
-
+})
+export default class extends Vue {
   async asyncData() {
-    const [products] = await Promise.all([api.products.getProducts()])
+    const [products] = await Promise.all([catalog.fetchProducts()])
 
     return {
-      products: products.data,
+      products,
     }
-  },
+  }
 }
 </script>

@@ -1,5 +1,5 @@
 import axios from 'axios'
 
-export const http = axios.create({
+export default axios.create({
   baseURL: process.env.BASE_API_URL,
 })

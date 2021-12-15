@@ -1,33 +1,34 @@
 <template>
   <div class="catalog-card">
     <div class="catalog-card-preview">
-      <div class="catalog-card-preview__category">{{ data.category }}</div>
+      <div class="catalog-card-preview__category">{{ item.category }}</div>
 
-      <img :src="data.image" alt="" class="catalog-card-preview__image" />
+      <img :src="item.image" alt="" class="catalog-card-preview__image" />
     </div>
 
     <div class="catalog-card-body">
-      <span class="catalog-card-body__price">{{ data.price }} $</span>
-      <h3 class="catalog-card-body__title">{{ data.title }}</h3>
+      <span class="catalog-card-body__price">{{ item.price }} $</span>
+      <h3 class="catalog-card-body__title">{{ item.title }}</h3>
 
       <BaseButton
         label="В корзину"
         type="secondary"
         class="catalog-card-body__cart-button"
+        @click.native="handleAddCartItem"
       />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import BaseButton from '~/components/Base/BaseButton.vue'
 
 @Component({
   components: { BaseButton },
 })
 export default class CatalogCard extends Vue {
-  @Prop({ required: true }) data!: Object
+  @Prop({ required: true }) item!: Object
 }
 </script>
 

@@ -1,11 +1,11 @@
 <template>
   <div class="catalog-grid">
-    <CatalogCard v-for="item in items" :key="item.id" :data="item" />
+    <CatalogCard v-for="item in items" :key="item.id" :item="item" />
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import CatalogCard from '@/components/Catalog/CatalogCard.vue'
 
 @Component({

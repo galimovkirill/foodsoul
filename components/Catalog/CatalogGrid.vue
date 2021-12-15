@@ -12,7 +12,7 @@ import CatalogCard from '@/components/Catalog/CatalogCard.vue'
   components: { CatalogCard },
 })
 export default class CatalogGrid extends Vue {
-  @Prop({ required: true }) items!: Array<any>
+  @Prop({ required: true }) items!: any[]
 }
 </script>
 

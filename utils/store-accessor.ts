@@ -1,11 +1,14 @@
 import { Store } from 'vuex'
 import { getModule } from 'vuex-module-decorators'
-import StoreCatalog from '~/store/catalog'
+import Catalog from '~/store/catalog'
+import Cart from '~/store/cart'
 
-let catalog: StoreCatalog
+let catalog: Catalog
+let cart: Cart
 
 function initialiseStores(store: Store<any>): void {
-  catalog = getModule(StoreCatalog, store)
+  catalog = getModule(Catalog, store)
+  cart = getModule(Cart, store)
 }
 
-export { initialiseStores, catalog }
+export { initialiseStores, catalog, cart }

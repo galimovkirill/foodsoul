@@ -10,12 +10,33 @@
       <span class="catalog-card-body__price">{{ item.price }} $</span>
       <h3 class="catalog-card-body__title">{{ item.title }}</h3>
 
-      <BaseButton
-        label="В корзину"
-        type="secondary"
-        class="catalog-card-body__cart-button"
-        @click.native="handleAddCartItem"
-      />
+      <div class="catalog-card__buttons">
+        <BaseButton
+          v-if="!isCartContainsItem"
+          label="В корзину"
+          type="secondary"
+          class="catalog-card-body__cart-button"
+          @click.native="handleAddCartItem"
+        />
+
+        <div v-else>
+          <BaseButton
+            label="+"
+            type="secondary"
+            class="catalog-card-body__cart-button"
+            @click.native="handleAddCartItem"
+          />
+
+          <span>{{ cartItemCount }}</span>
+
+          <BaseButton
+            label="-"
+            type="secondary"
+            class="catalog-card-body__cart-button"
+            @click.native="handleRemoveCartItem"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -23,12 +44,30 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import BaseButton from '~/components/Base/BaseButton.vue'
+import { cart } from '~/utils/store-accessor'
+import { isCartContainsItem, getCartItemCount } from '~/utils/cart'
 
 @Component({
   components: { BaseButton },
 })
 export default class CatalogCard extends Vue {
-  @Prop({ required: true }) item!: Object
+  @Prop({ required: true }) item!: any
+
+  get isCartContainsItem(): boolean {
+    return isCartContainsItem(this.item.id)
+  }
+
+  get cartItemCount(): number {
+    return getCartItemCount(this.item.id)
+  }
+
+  public handleAddCartItem(): void {
+    cart.addCartItem(this.item)
+  }
+
+  public handleRemoveCartItem(): void {
+    cart.removeCartItem(this.item)
+  }
 }
 </script>
 

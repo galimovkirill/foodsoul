@@ -28,6 +28,12 @@ export default class Cart extends VuexModule {
     return this.items
   }
 
+  get getCartTotalPrice(): any {
+    return this.items.reduce((acc: any, curr: any) => {
+      return acc + curr.price * curr.count
+    }, 0)
+  }
+
   @VuexMutation
   public ADD_CART_ITEM(item: CartItem) {
     this.items.push(item)

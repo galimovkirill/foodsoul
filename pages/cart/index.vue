@@ -8,7 +8,11 @@
 
         <div class="cart-footer">
           <div>Финальная цена: {{ totalPrice }}$</div>
-          <BaseButton label="Оформить заказ" type="primary" />
+          <BaseButton
+            label="Оформить заказ"
+            type="primary"
+            @click.native="handleCheckout"
+          />
         </div>
       </div>
 
@@ -19,7 +23,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { cart } from '~/utils/store-accessor'
+import { cart, modal } from '~/utils/store-accessor'
 import CartCard from '~/components/Cart/CartCard.vue'
 import BaseButton from '~/components/Base/BaseButton.vue'
 
@@ -33,6 +37,10 @@ export default class extends Vue {
 
   get totalPrice() {
     return cart.getCartTotalPrice
+  }
+
+  public handleCheckout(): void {
+    modal.setShownModal('ModalSuccessOrder')
   }
 }
 </script>

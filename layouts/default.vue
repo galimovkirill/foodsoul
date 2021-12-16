@@ -4,14 +4,17 @@
     <div class="main-wrapper">
       <Nuxt />
     </div>
+
+    <BaseModalViewer />
   </main>
 </template>
 
 <script lang="ts">
 import TheHeader from '@/components/Header/TheHeader.vue'
+import BaseModalViewer from '~/components/Base/BaseModalViewer.vue'
 
 export default {
-  components: { TheHeader },
+  components: { TheHeader, BaseModalViewer },
 }
 </script>
 

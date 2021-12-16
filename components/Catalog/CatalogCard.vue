@@ -19,23 +19,7 @@
           @click.native="handleAddCartItem"
         />
 
-        <div v-else>
-          <BaseButton
-            label="+"
-            type="secondary"
-            class="catalog-card-body__cart-button"
-            @click.native="handleAddCartItem"
-          />
-
-          <span>{{ cartItemCount }}</span>
-
-          <BaseButton
-            label="-"
-            type="secondary"
-            class="catalog-card-body__cart-button"
-            @click.native="handleRemoveCartItem"
-          />
-        </div>
+        <ProductCountButtons v-else :item="item" />
       </div>
     </div>
   </div>
@@ -44,11 +28,12 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import BaseButton from '~/components/Base/BaseButton.vue'
+import ProductCountButtons from '~/components/Base/ProductCountButtons.vue'
 import { cart } from '~/utils/store-accessor'
-import { isCartContainsItem, getCartItemCount } from '~/utils/cart'
+import { isCartContainsItem } from '~/utils/cart'
 
 @Component({
-  components: { BaseButton },
+  components: { BaseButton, ProductCountButtons },
 })
 export default class CatalogCard extends Vue {
   @Prop({ required: true }) item!: any
@@ -57,16 +42,8 @@ export default class CatalogCard extends Vue {
     return isCartContainsItem(this.item.id)
   }
 
-  get cartItemCount(): number {
-    return getCartItemCount(this.item.id)
-  }
-
   public handleAddCartItem(): void {
     cart.addCartItem(this.item)
-  }
-
-  public handleRemoveCartItem(): void {
-    cart.removeCartItem(this.item)
   }
 }
 </script>

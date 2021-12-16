@@ -10,33 +10,18 @@
       </div>
     </div>
 
-    <div class="cart-card__actions">
-      <BaseButton
-        label="+"
-        type="secondary"
-        @click.native="handleAddCartItem"
-      />
-
-      <span>{{ cartItemCount }}</span>
-
-      <BaseButton
-        label="-"
-        type="secondary"
-        @click.native="handleRemoveCartItem"
-      />
-    </div>
+    <ProductCountButtons :item="item" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import BaseButton from '~/components/Base/BaseButton.vue'
+import ProductCountButtons from '~/components/Base/ProductCountButtons'
 import { cart } from '~/utils/store-accessor'
-import { getCartItemCount } from '~/utils/cart'
 import { getElementIndex } from '~/utils'
 
 @Component({
-  components: { BaseButton },
+  components: { ProductCountButtons },
 })
 export default class extends Vue {
   @Prop({ required: true }) item!: any
@@ -45,18 +30,6 @@ export default class extends Vue {
 
   get cartItems(): any[] {
     return cart.getCartItems
-  }
-
-  get cartItemCount(): number {
-    return getCartItemCount(this.item.id)
-  }
-
-  public handleAddCartItem(): void {
-    cart.addCartItem(this.item)
-  }
-
-  public handleRemoveCartItem(): void {
-    cart.removeCartItem(this.item)
   }
 
   public handleTotalRemoveCartItem(): void {

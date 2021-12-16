@@ -1,14 +1,18 @@
 <template>
   <div class="cart">
     <div class="container">
-      <div class="cart-body">
-        <CartCard v-for="item in cartItems" :key="item.id" :item="item" />
+      <div v-if="cartItems.length">
+        <div class="cart-body">
+          <CartCard v-for="item in cartItems" :key="item.id" :item="item" />
+        </div>
+
+        <div class="cart-footer">
+          <div>Финальная цена: {{ totalPrice }}$</div>
+          <BaseButton label="Оформить заказ" type="primary" />
+        </div>
       </div>
 
-      <div class="cart-footer">
-        <div>Финальная цена: {{ totalPrice }}$</div>
-        <BaseButton label="Оформить заказ" type="primary" />
-      </div>
+      <div v-else>Корзина пуста.</div>
     </div>
   </div>
 </template>

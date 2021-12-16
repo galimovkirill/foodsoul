@@ -16,9 +16,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import ProductCountButtons from '~/components/Base/ProductCountButtons'
+import ProductCountButtons from '~/components/Base/ProductCountButtons.vue'
 import { cart } from '~/utils/store-accessor'
-import { getElementIndex } from '~/utils'
 
 @Component({
   components: { ProductCountButtons },
@@ -26,14 +25,12 @@ import { getElementIndex } from '~/utils'
 export default class extends Vue {
   @Prop({ required: true }) item!: any
 
-  itemIndex = getElementIndex(this.cartItems, 'id', this.item)
-
   get cartItems(): any[] {
     return cart.getCartItems
   }
 
   public handleTotalRemoveCartItem(): void {
-    cart.REMOVE_CART_ITEM(this.itemIndex)
+    cart.totalRemoveCartItem(this.item)
   }
 }
 </script>

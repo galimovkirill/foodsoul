@@ -35,6 +35,11 @@ export default class Cart extends VuexModule {
   }
 
   @VuexMutation
+  public SET_CART_ITEMS(items: CartItem[]) {
+    this.items = items
+  }
+
+  @VuexMutation
   public ADD_CART_ITEM(item: CartItem) {
     this.items.push(item)
   }
@@ -55,16 +60,29 @@ export default class Cart extends VuexModule {
   }
 
   @VuexAction
+  public updateCartCookies() {
+    const cookies = this.store.app.$cookies // TODO: fix TS error
+    cookies.set('cart', this.items)
+  }
+
+  @VuexAction
+  public setCartItems(items: CartItem[]) {
+    this.SET_CART_ITEMS(items)
+  }
+
+  @VuexAction
   public addCartItem(item: CartItem) {
     const itemIndex = getElementIndex(this.items, 'id', item)
 
     if (itemIndex !== -1) {
       this.INCREMENT_CART_ITEM(itemIndex)
+      this.updateCartCookies()
 
       return 0
     }
 
     this.ADD_CART_ITEM({ ...item, count: 1 })
+    this.updateCartCookies()
   }
 
   @VuexAction
@@ -73,10 +91,19 @@ export default class Cart extends VuexModule {
 
     if (this.items[itemIndex].count <= 1) {
       this.REMOVE_CART_ITEM(itemIndex)
+      this.updateCartCookies()
 
       return 0
     }
 
     this.DECREMENT_CART_ITEM(itemIndex)
+    this.updateCartCookies()
+  }
+
+  @VuexAction
+  public totalRemoveCartItem(item: CartItem) {
+    const itemIndex = getElementIndex(this.items, 'id', item)
+    this.REMOVE_CART_ITEM(itemIndex)
+    this.updateCartCookies()
   }
 }

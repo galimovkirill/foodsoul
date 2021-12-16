@@ -15,7 +15,7 @@ export default {
 
   css: ['@/assets/styles/main.scss'],
 
-  modules: ['@nuxtjs/axios', '@nuxtjs/dotenv'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/dotenv', 'cookie-universal-nuxt'],
   buildModules: [
     '@nuxt/typescript-build',
     '@nuxtjs/style-resources',
